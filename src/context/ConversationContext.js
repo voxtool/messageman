@@ -69,21 +69,22 @@ function ConversationContextProvider(props) {
         const recipients = conversation.recipients.map(recipient => {
             const contact = user?.contacts.find(c => {
                 return c._id === recipient;
-            })
+            });
             const username = (contact && contact.username) || recipient;
             return { _id: recipient, username };
-        })
+        });
         const messages = conversation.messages.map(m => {
             const contact = user?.contacts.find(c => {
                 return c._id === m.sender;
-            })
+            });
             const username = (contact && contact.username) || m.sender;
             const fromMe = user?._id === m.sender;
             return { ...m, senderName: username, fromMe }
-        })
-        const selected = index === selectedConversation
-        return { ...conversation, messages, recipients, selected };
-    })
+        });
+        const selected = index === selectedConversation;
+        const isRead = conversation.messages[conversation.messages.length - 1]?.sender === user?._id || index === selectedConversation || conversation.messages.length === 0;
+        return { ...conversation, messages, recipients, selected, isRead };
+    });
 
     return (
         <ConversationContext.Provider value={{ conversations: formatted, createConversation, setSelectedConversation, conversation: formatted[selectedConversation], sendMessage }}>

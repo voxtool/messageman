@@ -107,7 +107,7 @@ function Login() {
                     </Tab.Pane>
                     <Tab.Pane eventKey={REGISTER_KEY}>
                         <Form onSubmit={registerFormik.handleSubmit}>
-                        {error ? <div className="text-danger">{error}</div> : null}
+                            {error ? <div className="text-danger">{error}</div> : null}
                             <Form.Group className="m-2">
                                 <Form.Label>Enter Your Username</Form.Label>
                                 <Form.Control type="text" name="username" onChange={registerFormik.handleChange} onBlur={registerFormik.handleBlur} value={registerFormik.values.username} placeholder="Username" />

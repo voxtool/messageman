@@ -64,7 +64,7 @@ function Sidebar() {
                 <Button onClick={() => setShow(true)} className="rounded-0">New {conversationsOpen ? 'Conversation' : 'Contact'}</Button>
             </Tab.Container>
             <Modal show={show} onHide={closePopUp} animation={false}>
-                {conversationsOpen ? <NewConversationModal  closePopUp={closePopUp}/> : <NewContactModal />}
+                {conversationsOpen ? <NewConversationModal closePopUp={closePopUp} /> : <NewContactModal />}
             </Modal>
         </div>
     )

@@ -44,9 +44,12 @@ function ConversationContextProvider(props) {
         setSelectedConversation(index);
     }
 
-    async function createConversation(data) {
+    function createConversation(data) {
         const recipients = [...data, user._id];
-        socket.emit('create-conversation', recipients);
+        const exists = conversations.find(el => isEqual(el.recipients, recipients));
+        if (!exists) {
+            socket.emit('create-conversation', recipients);
+        }
     }
 
     useEffect(() => {
@@ -71,7 +74,7 @@ function ConversationContextProvider(props) {
         return () => socket.off('receive-message');
     }, [socket, setNotificationIds]);
 
-    async function sendMessage(recipients, conversationId, text) {
+    function sendMessage(recipients, conversationId, text) {
         socket.emit('send-message', { recipients, message: { sender: user._id, text }, conversationId });
         return;
     }
@@ -103,6 +106,19 @@ function ConversationContextProvider(props) {
         const isRead = !notificationIds.includes(index) || conversation.messages.length === 0;
         return { ...conversation, messages, recipients, selected, isRead };
     });
+
+    function isEqual(arr1, arr2) {
+        if (arr1.length !== arr2.length) {
+            return false;
+        }
+        const string1 = arr1.sort().join(' ');
+        const string2 = arr2.sort().join(' ');
+        if (string1 === string2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     return (
         <ConversationContext.Provider value={{ conversations: formatted, createConversation, select, conversation: formatted[selectedConversation], sendMessage }}>

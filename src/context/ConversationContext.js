@@ -10,7 +10,7 @@ function ConversationContextProvider(props) {
     const { user } = useContext(AuthContext);
     const socket = useContext(SocketContext);
     const [conversations, setConversations] = useState([]);
-    const [selectedConversation, setSelectedConversation] = useState(0);
+    const [selectedConversation, setSelectedConversation] = useState();
     const [notificationIds, setNotificationIds] = useLocalStorage('notifications', []);
 
     async function getAllConversations() {

@@ -23,7 +23,9 @@ function NewConversationModal(props) {
 
     async function onSubmitConversation(e) {
         e.preventDefault();
-        createConversation(selectedContacts);
+        if (selectedContacts.length !== 0) {
+            createConversation(selectedContacts);
+        }
         props.closePopUp();
     }
 

@@ -2,9 +2,11 @@
 
 Messageman is a desktop chat application supporting contacts, group conversations and private conversations.
 
+## This project is hosted on [https://messageman.herokuapp.com/](https://messageman.herokuapp.com/)
+
 ## How to run
 
-To have a local functioning application you also need the server part located at [https://github.com/voxtool/messageman-server](https://github.com/voxtool/messageman-server):
+To have a local functioning application you also need the server part located at [https://github.com/voxtool/messageman-server](https://github.com/voxtool/messageman-server)
 
 ### `npm start`
 
